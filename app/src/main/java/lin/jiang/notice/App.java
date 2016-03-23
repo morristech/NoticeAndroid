@@ -1,4 +1,4 @@
-package lin.jiang.noticeandroid;
+package lin.jiang.notice;
 
 import android.app.Application;
 

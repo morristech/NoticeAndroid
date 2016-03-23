@@ -1,4 +1,4 @@
-package lin.jiang.noticeandroid;
+package lin.jiang.notice;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
