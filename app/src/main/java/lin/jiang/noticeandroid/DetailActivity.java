@@ -5,12 +5,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class DetailActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +25,11 @@ public class DetailActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+//        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+//        collapsingToolbarLayout.setStatusBarScrimColor(Color.YELLOW);
+//        collapsingToolbarLayout.setExpandedTitleMargin(0,0,0,0);
+//        collapsingToolbarLayout.setTitle("撒欸和地方撒回复啊是飞机撒地方奥iuoiwewejfk为附件文件发来我");
+
     }
 
     @Override
