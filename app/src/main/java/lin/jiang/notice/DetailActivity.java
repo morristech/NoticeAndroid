@@ -9,6 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import rx.Observable;
+
 public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,23 +38,48 @@ public class DetailActivity extends AppCompatActivity {
 //        collapsingToolbarLayout.setExpandedTitleMargin(0,0,0,0);
 //        collapsingToolbarLayout.setTitle("撒欸和地方撒回复啊是飞机撒地方奥iuoiwewejfk为附件文件发来我");
 
+        Retrofit retrofit = new Retrofit.Builder()
+                // 可选：对Rxjava的适配
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//                .callbackExecutor()
+//                .callFactory()
+//                .client()
+//                .validateEagerly()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("")
+                .build();
+        ApiService service = retrofit.create(ApiService.class);
+        OBservice oBservice = retrofit.create(OBservice.class);
+        Call<User> call = service.load();
+//        call.execute();// 同步
+//        call.enqueue(callback);// 异步
+        Observable<User> observable = oBservice.load();
+//        observable.observeOn().compose().map().ambWith().subscribe();// rx链
+    }
+    public interface ApiService {
+        @POST(User.TAG)
+        Call<User> load();
+        @GET("")
+        Call<User> get();
+    }
+    public interface OBservice {
+        Observable<User> load();
+    }
+    public class User{
+        public static final String TAG = "";
+        public String name;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_detail, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
