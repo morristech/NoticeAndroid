@@ -5,6 +5,6 @@ package lin.jiang.notice;
  */
 public class Constant {
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     public static final String ID_BUGLY = "900022881";
 }
