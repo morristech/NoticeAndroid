@@ -23,6 +23,15 @@ public class NewsDetail implements Serializable {
 
     private DataBean data;
 
+    @Override
+    public String toString() {
+        return "NewsDetail{" +
+                "msg='" + msg + '\'' +
+                ", result=" + result +
+                ", data=" + data +
+                '}';
+    }
+
     public String getMsg() {
         return msg;
     }
@@ -66,6 +75,16 @@ public class NewsDetail implements Serializable {
          */
 
         private ArticleBean article;
+
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "content=" + content +
+                    ", article=" + article +
+                    ", file=" + file +
+                    '}';
+        }
+
         /**
          * id : 59
          * url : http://www.cdut.edu.cn/xww/UserFiles/File/20160427/20160427141548_624.doc
@@ -108,6 +127,15 @@ public class NewsDetail implements Serializable {
                 return id;
             }
 
+            @Override
+            public String toString() {
+                return "ContentBean{" +
+                        "id=" + id +
+                        ", content='" + content + '\'' +
+                        ", dateTime='" + dateTime + '\'' +
+                        '}';
+            }
+
             public void setId(int id) {
                 this.id = id;
             }
@@ -135,8 +163,8 @@ public class NewsDetail implements Serializable {
             private String title;
             private int id;
             private String time;
-            private int source;
-            private int type;
+            private String source;
+            private String type;
 
             public String getUrl() {
                 return url;
@@ -178,20 +206,33 @@ public class NewsDetail implements Serializable {
                 this.time = time;
             }
 
-            public int getSource() {
+            public String getSource() {
                 return source;
             }
 
-            public void setSource(int source) {
+            public void setSource(String source) {
                 this.source = source;
             }
 
-            public int getType() {
+            public String getType() {
                 return type;
             }
 
-            public void setType(int type) {
+            public void setType(String type) {
                 this.type = type;
+            }
+
+            @Override
+            public String toString() {
+                return "ArticleBean{" +
+                        "url='" + url + '\'' +
+                        ", author='" + author + '\'' +
+                        ", title='" + title + '\'' +
+                        ", id=" + id +
+                        ", time='" + time + '\'' +
+                        ", source='" + source + '\'' +
+                        ", type='" + type + '\'' +
+                        '}';
             }
         }
 
@@ -227,6 +268,16 @@ public class NewsDetail implements Serializable {
 
             public String getName() {
                 return name;
+            }
+
+            @Override
+            public String toString() {
+                return "FileBean{" +
+                        "id=" + id +
+                        ", url='" + url + '\'' +
+                        ", type='" + type + '\'' +
+                        ", name='" + name + '\'' +
+                        '}';
             }
 
             public void setName(String name) {

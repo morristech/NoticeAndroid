@@ -111,10 +111,10 @@
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
+                android:background="@color/_bg"
                 android:id="@+id/_detail_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="1000dp"
-                android:background="@color/colorPrimary"
+                android:layout_height="match_parent"
                 app:layout_behavior="android.support.design.widget.BottomSheetBehavior" />
 
         </android.support.design.widget.CoordinatorLayout>

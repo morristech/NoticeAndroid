@@ -1,21 +1,21 @@
 package lin.jiang.notice.domain.interactor;
 
-import lin.jiang.notice.domain.entity.NewsDetail;
+import lin.jiang.notice.domain.entity.VisitNum;
 import lin.jiang.notice.domain.exception.ResponeException;
 import lin.jiang.notice.domain.repository.DataSource;
 
-public class NewsDetailUseCase extends UseCase<NewsDetailUseCase.RequestValues, NewsDetailUseCase.ResponseValue> {
+public class VisitNumUseCase extends UseCase<VisitNumUseCase.RequestValues, VisitNumUseCase.ResponseValue> {
     DataSource dataSource;
 
-    public NewsDetailUseCase(DataSource dataSource) {
+    public VisitNumUseCase(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     @Override
     protected void executeUseCase(RequestValues requestValues) {
-        dataSource.getNewsDetail("" + requestValues.aid, new DataSource.Callback<NewsDetail>() {
+        dataSource.getVisitNum("" + requestValues.aid, new DataSource.Callback<VisitNum>() {
             @Override
-            public void onSuccess(NewsDetail data) {
+            public void onSuccess(VisitNum data) {
                 if (data.isResult()) {
                     getUseCaseCallback().onSuccess(new ResponseValue(data));
                 } else {
@@ -31,7 +31,7 @@ public class NewsDetailUseCase extends UseCase<NewsDetailUseCase.RequestValues, 
     }
 
     public static final class RequestValues implements UseCase.RequestValues {
-        public int aid;
+        public final int aid;
 
         public RequestValues(int aid) {
             this.aid = aid;
@@ -39,10 +39,10 @@ public class NewsDetailUseCase extends UseCase<NewsDetailUseCase.RequestValues, 
     }
 
     public static final class ResponseValue implements UseCase.ResponseValue {
-        public final NewsDetail newsDetail;
+        public final VisitNum visitNum;
 
-        public ResponseValue(NewsDetail newsDetail) {
-            this.newsDetail = newsDetail;
+        public ResponseValue(VisitNum visitNum) {
+            this.visitNum = visitNum;
         }
     }
 }

@@ -16,6 +16,16 @@ public class CommentList implements Serializable {
 
     private String msg;
     private boolean result;
+
+    @Override
+    public String toString() {
+        return "CommentList{" +
+                "msg='" + msg + '\'' +
+                ", result=" + result +
+                ", data=" + data +
+                '}';
+    }
+
     /**
      * tool : nexus
      * userId : 6
@@ -54,10 +64,35 @@ public class CommentList implements Serializable {
     public static class Comment implements Serializable {
         private String tool;
         private String userId;
+
         private String datetime;
         private int id;
         private String message;
         private int articleId;
+
+        @Override
+        public String toString() {
+            return "Comment{" +
+                    "tool='" + tool + '\'' +
+                    ", userId='" + userId + '\'' +
+                    ", datetime='" + datetime + '\'' +
+                    ", id=" + id +
+                    ", message='" + message + '\'' +
+                    ", articleId=" + articleId +
+                    ", deviceId='" + deviceId + '\'' +
+                    '}';
+        }
+
+        public void setDeviceId(String deviceId) {
+            this.deviceId = deviceId;
+        }
+
+        public String getDeviceId() {
+
+            return deviceId;
+        }
+
+        private String deviceId;
 
         public String getTool() {
             return tool;

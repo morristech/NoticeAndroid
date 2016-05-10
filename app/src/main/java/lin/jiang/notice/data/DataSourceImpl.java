@@ -5,8 +5,11 @@ import java.io.IOException;
 import lin.jiang.notice.data.exception.RequestFailureException;
 import lin.jiang.notice.data.local.LocalDataHelper;
 import lin.jiang.notice.data.remote.Api;
+import lin.jiang.notice.domain.entity.BaseEntity;
+import lin.jiang.notice.domain.entity.CommentList;
 import lin.jiang.notice.domain.entity.NewsDetail;
 import lin.jiang.notice.domain.entity.NewsList;
+import lin.jiang.notice.domain.entity.VisitNum;
 import lin.jiang.notice.domain.repository.DataSource;
 
 public class DataSourceImpl implements DataSource {
@@ -73,6 +76,66 @@ public class DataSourceImpl implements DataSource {
         try {
             newsDetail = Api.instance().getNewsDetail(aid);
             callback.onSuccess(newsDetail);
+        } catch (IOException e) {
+            e.printStackTrace();
+            callback.onError(Callback.CODE_IO, "IOException");
+        } catch (RequestFailureException e) {
+            e.printStackTrace();
+            callback.onError(e.code, e.msg);
+        }
+    }
+
+    @Override
+    public void getVisitNum(String aid, Callback<VisitNum> callback) {
+        VisitNum visitNum = null;
+        try {
+            visitNum = Api.instance().getVisitNum(aid);
+            callback.onSuccess(visitNum);
+        } catch (IOException e) {
+            e.printStackTrace();
+            callback.onError(Callback.CODE_IO, "IOException");
+        } catch (RequestFailureException e) {
+            e.printStackTrace();
+            callback.onError(e.code, e.msg);
+        }
+    }
+
+    @Override
+    public void getCommentList(String _articleId, String _startId, String _pageNum, Callback<CommentList> callback) {
+        CommentList commentList = null;
+        try {
+            commentList = Api.instance().getCommentList(_articleId, null, _startId, _pageNum);
+            callback.onSuccess(commentList);
+        } catch (IOException e) {
+            e.printStackTrace();
+            callback.onError(Callback.CODE_IO, "IOException");
+        } catch (RequestFailureException e) {
+            e.printStackTrace();
+            callback.onError(e.code, e.msg);
+        }
+    }
+
+    @Override
+    public void addComment(String _articleId, String _tool, String _msg, Callback<BaseEntity> callback) {
+        BaseEntity baseEntity = null;
+        try {
+            baseEntity = Api.instance().addComment(_articleId,_tool,_msg);
+            callback.onSuccess(baseEntity);
+        } catch (IOException e) {
+            e.printStackTrace();
+            callback.onError(Callback.CODE_IO, "IOException");
+        } catch (RequestFailureException e) {
+            e.printStackTrace();
+            callback.onError(e.code, e.msg);
+        }
+    }
+
+    @Override
+    public void search(String _param, String _pageNum, Callback<NewsList> callback) {
+        NewsList newsList = null;
+        try {
+            newsList = Api.instance().searchNews(_param, _pageNum);
+            callback.onSuccess(newsList);
         } catch (IOException e) {
             e.printStackTrace();
             callback.onError(Callback.CODE_IO, "IOException");

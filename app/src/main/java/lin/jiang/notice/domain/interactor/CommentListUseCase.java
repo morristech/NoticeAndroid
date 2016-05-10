@@ -1,21 +1,21 @@
 package lin.jiang.notice.domain.interactor;
 
-import lin.jiang.notice.domain.entity.NewsDetail;
+import lin.jiang.notice.domain.entity.CommentList;
 import lin.jiang.notice.domain.exception.ResponeException;
 import lin.jiang.notice.domain.repository.DataSource;
 
-public class NewsDetailUseCase extends UseCase<NewsDetailUseCase.RequestValues, NewsDetailUseCase.ResponseValue> {
+public class CommentListUseCase extends UseCase<CommentListUseCase.RequestValues, CommentListUseCase.ResponseValue> {
     DataSource dataSource;
 
-    public NewsDetailUseCase(DataSource dataSource) {
+    public CommentListUseCase(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     @Override
     protected void executeUseCase(RequestValues requestValues) {
-        dataSource.getNewsDetail("" + requestValues.aid, new DataSource.Callback<NewsDetail>() {
+        dataSource.getCommentList(requestValues._articleId, requestValues._startId, "" + requestValues.page, new DataSource.Callback<CommentList>() {
             @Override
-            public void onSuccess(NewsDetail data) {
+            public void onSuccess(CommentList data) {
                 if (data.isResult()) {
                     getUseCaseCallback().onSuccess(new ResponseValue(data));
                 } else {
@@ -31,18 +31,20 @@ public class NewsDetailUseCase extends UseCase<NewsDetailUseCase.RequestValues, 
     }
 
     public static final class RequestValues implements UseCase.RequestValues {
-        public int aid;
+        public final String _articleId, _startId;
+        public final int page = 10;
 
-        public RequestValues(int aid) {
-            this.aid = aid;
+        public RequestValues(String _articleId, String _startId) {
+            this._articleId = _articleId;
+            this._startId = _startId;
         }
     }
 
     public static final class ResponseValue implements UseCase.ResponseValue {
-        public final NewsDetail newsDetail;
+        public final CommentList commentList;
 
-        public ResponseValue(NewsDetail newsDetail) {
-            this.newsDetail = newsDetail;
+        public ResponseValue(CommentList commentList) {
+            this.commentList = commentList;
         }
     }
 }

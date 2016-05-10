@@ -9,6 +9,7 @@ import lin.jiang.notice.domain.entity.CommentList;
 import lin.jiang.notice.domain.entity.NewsDetail;
 import lin.jiang.notice.domain.entity.NewsList;
 import lin.jiang.notice.domain.entity.PicList;
+import lin.jiang.notice.domain.entity.VisitNum;
 import lin.jiang.notice.util.DeviceUtil;
 import lin.jiang.notice.util.L;
 import okhttp3.Interceptor;
@@ -89,6 +90,14 @@ public class Api {
         Call<PicList> getPicList();
     }
 
+    /**
+     * 阅读量
+     */
+    public interface VisitApi {
+        @GET("news/visit/")
+        Call<VisitNum> getVisitNum(@Query("_aid") String _aid);
+    }
+
     synchronized public static Api instance() {
         if (api == null) {
             api = new Api();
@@ -131,8 +140,8 @@ public class Api {
     /**
      * @param _type    可选：1新闻2公告3通知
      * @param _source  可选：1index2图书馆3教务处5信科院
-     * @param _startId  可选：分页起始ID
-     * @param _pageNum  可选：每页数量
+     * @param _startId 可选：分页起始ID
+     * @param _pageNum 可选：每页数量
      * @return
      * @throws IOException
      * @throws RequestFailureException
@@ -149,6 +158,7 @@ public class Api {
 
     /**
      * 根据评论和访问量综合
+     *
      * @return
      * @throws IOException
      * @throws RequestFailureException
@@ -164,8 +174,7 @@ public class Api {
     }
 
     /**
-     *
-     * @param _aid  必填
+     * @param _aid 必填
      * @return
      * @throws IOException
      * @throws RequestFailureException
@@ -181,9 +190,8 @@ public class Api {
     }
 
     /**
-     *
-     * @param _param    必填：关键词
-     * @param _pageNum  可选：分页数
+     * @param _param   必填：关键词
+     * @param _pageNum 可选：分页数
      * @return
      * @throws IOException
      * @throws RequestFailureException
@@ -199,10 +207,9 @@ public class Api {
     }
 
     /**
-     *
-     * @param _articleId    必填：信息ID
-     * @param _tool 可选：
-     * @param _msg  必填：评论内容
+     * @param _articleId 必填：信息ID
+     * @param _tool      可选：
+     * @param _msg       必填：评论内容
      * @return
      * @throws IOException
      * @throws RequestFailureException
@@ -218,11 +225,10 @@ public class Api {
     }
 
     /**
-     *
-     * @param _articleId    可选：某篇信息的ID
-     * @param _userId   可选：指定某个User的所有评论，建议在_articleId为null时传入该参数！
-     * @param _startId  可选：分页起始ID
-     * @param _pageNum  可选：分页数
+     * @param _articleId 可选：某篇信息的ID
+     * @param _userId    可选：指定某个User的所有评论，建议在_articleId为null时传入该参数！
+     * @param _startId   可选：分页起始ID
+     * @param _pageNum   可选：分页数
      * @return
      * @throws IOException
      * @throws RequestFailureException
@@ -239,6 +245,16 @@ public class Api {
 
     public PicList getPicList() throws IOException, RequestFailureException {
         retrofit2.Response<PicList> response = retrofit.create(PicApi.class).getPicList().execute();
+        if (response.isSuccessful()) {
+            L.d(response.body());
+            return response.body();
+        } else {
+            throw new RequestFailureException(response.code(), response.message());
+        }
+    }
+
+    public VisitNum getVisitNum(String _aid) throws IOException, RequestFailureException {
+        retrofit2.Response<VisitNum> response = retrofit.create(VisitApi.class).getVisitNum(_aid).execute();
         if (response.isSuccessful()) {
             L.d(response.body());
             return response.body();

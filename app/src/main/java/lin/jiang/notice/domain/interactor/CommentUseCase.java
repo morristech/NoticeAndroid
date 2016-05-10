@@ -1,21 +1,21 @@
 package lin.jiang.notice.domain.interactor;
 
-import lin.jiang.notice.domain.entity.NewsDetail;
+import lin.jiang.notice.domain.entity.BaseEntity;
 import lin.jiang.notice.domain.exception.ResponeException;
 import lin.jiang.notice.domain.repository.DataSource;
 
-public class NewsDetailUseCase extends UseCase<NewsDetailUseCase.RequestValues, NewsDetailUseCase.ResponseValue> {
+public class CommentUseCase extends UseCase<CommentUseCase.RequestValues, CommentUseCase.ResponseValue> {
     DataSource dataSource;
 
-    public NewsDetailUseCase(DataSource dataSource) {
+    public CommentUseCase(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     @Override
     protected void executeUseCase(RequestValues requestValues) {
-        dataSource.getNewsDetail("" + requestValues.aid, new DataSource.Callback<NewsDetail>() {
+        dataSource.addComment(requestValues._articleId, requestValues._tool, requestValues._msg, new DataSource.Callback<BaseEntity>() {
             @Override
-            public void onSuccess(NewsDetail data) {
+            public void onSuccess(BaseEntity data) {
                 if (data.isResult()) {
                     getUseCaseCallback().onSuccess(new ResponseValue(data));
                 } else {
@@ -31,18 +31,20 @@ public class NewsDetailUseCase extends UseCase<NewsDetailUseCase.RequestValues, 
     }
 
     public static final class RequestValues implements UseCase.RequestValues {
-        public int aid;
+        public final String _articleId, _tool, _msg;
 
-        public RequestValues(int aid) {
-            this.aid = aid;
+        public RequestValues(String _articleId, String _tool, String _msg) {
+            this._articleId = _articleId;
+            this._tool = _tool;
+            this._msg = _msg;
         }
     }
 
     public static final class ResponseValue implements UseCase.ResponseValue {
-        public final NewsDetail newsDetail;
+        public final BaseEntity baseEntity;
 
-        public ResponseValue(NewsDetail newsDetail) {
-            this.newsDetail = newsDetail;
+        public ResponseValue(BaseEntity baseEntity) {
+            this.baseEntity = baseEntity;
         }
     }
 }

@@ -1,9 +1,12 @@
 package lin.jiang.notice.presentation.newsdetail;
 
+import android.webkit.WebView;
+
 import java.util.List;
 
 import lin.jiang.notice.domain.entity.CommentList;
 import lin.jiang.notice.domain.entity.NewsDetail;
+import lin.jiang.notice.domain.entity.VisitNum;
 import lin.jiang.notice.presentation.base.BasePresenter;
 import lin.jiang.notice.presentation.base.BaseView;
 
@@ -17,7 +20,7 @@ public class DetailContract {
         void loadHtml(boolean isOrigin);
         void getVisitNumJson();
         void loadCommentListJson();
-        void addComment();
+        void addComment(String msg);
         void doShare();
         void seeFile();
     }
@@ -34,8 +37,11 @@ public class DetailContract {
 
         void notifyDetailJsonSuccess(NewsDetail newsDetail);
         void notifyCommentListJsonSuccess(List<CommentList.Comment> commentList);
+        void notifyVisitNumJsonSuccess(VisitNum visitNum);
         void notifyAddCommentSuccess();
         void notifyShareSuccess();
         void showHint(String msg);
+
+        WebView getWebView();
     }
 }

@@ -1,21 +1,24 @@
 package lin.jiang.notice.domain.interactor;
 
-import lin.jiang.notice.domain.entity.NewsDetail;
+import lin.jiang.notice.domain.entity.NewsList;
 import lin.jiang.notice.domain.exception.ResponeException;
 import lin.jiang.notice.domain.repository.DataSource;
 
-public class NewsDetailUseCase extends UseCase<NewsDetailUseCase.RequestValues, NewsDetailUseCase.ResponseValue> {
+/**
+ * Created by Summer on 2016/5/10.
+ */
+public class SearchUseCase extends UseCase<SearchUseCase.RequestValues, SearchUseCase.ResponseValue> {
     DataSource dataSource;
 
-    public NewsDetailUseCase(DataSource dataSource) {
+    public SearchUseCase(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     @Override
     protected void executeUseCase(RequestValues requestValues) {
-        dataSource.getNewsDetail("" + requestValues.aid, new DataSource.Callback<NewsDetail>() {
+        dataSource.search(requestValues._param, requestValues._pageNum, new DataSource.Callback<NewsList>() {
             @Override
-            public void onSuccess(NewsDetail data) {
+            public void onSuccess(NewsList data) {
                 if (data.isResult()) {
                     getUseCaseCallback().onSuccess(new ResponseValue(data));
                 } else {
@@ -31,18 +34,19 @@ public class NewsDetailUseCase extends UseCase<NewsDetailUseCase.RequestValues, 
     }
 
     public static final class RequestValues implements UseCase.RequestValues {
-        public int aid;
+        public final String _param, _pageNum;
 
-        public RequestValues(int aid) {
-            this.aid = aid;
+        public RequestValues(String _param, String _pageNum) {
+            this._param = _param;
+            this._pageNum = _pageNum;
         }
     }
 
     public static final class ResponseValue implements UseCase.ResponseValue {
-        public final NewsDetail newsDetail;
+        public final NewsList newsList;
 
-        public ResponseValue(NewsDetail newsDetail) {
-            this.newsDetail = newsDetail;
+        public ResponseValue(NewsList newsList) {
+            this.newsList = newsList;
         }
     }
 }
