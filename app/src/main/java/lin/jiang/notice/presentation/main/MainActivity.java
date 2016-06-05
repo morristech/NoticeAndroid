@@ -33,8 +33,8 @@ public class MainActivity extends BaseActivtiy implements View.OnClickListener {
         toolbar.setNavigationOnClickListener(this);
         ViewPager viewPager = (ViewPager) findViewById(R.id._main_viewpager);
         ViewPagerIndicator indicator = (ViewPagerIndicator) findViewById(R.id._main_indocator);
-        viewPager.setOffscreenPageLimit(MainPageAdaper.TITLE.length);
-        viewPager.setAdapter(new MainPageAdaper(getSupportFragmentManager()));
+        viewPager.setOffscreenPageLimit(MainNewsPageAdapter.TAB_NAME.length);
+        viewPager.setAdapter(new MainNewsPageAdapter(getSupportFragmentManager()));
         indicator.setViewPager(viewPager);
         getSupportFragmentManager().beginTransaction().replace(R.id._main_drawer, DrawerFragment.newInstance()).commit();
     }
@@ -72,32 +72,24 @@ public class MainActivity extends BaseActivtiy implements View.OnClickListener {
     }
 
 
-    private static class MainPageAdaper extends FragmentPagerAdapter {
-        public static final String[] TITLE = new String[]{"推荐", "最新", "新闻", "通知"};
-        private NewsFragment[] fragments = new NewsFragment[TITLE.length];
-
+    private static class MainNewsPageAdapter extends FragmentPagerAdapter {
+        public static String TAB_NAME[] = new String[]{"推荐", "最新", "新闻", "通知"};
+        private NewsFragment[] fragments = new NewsFragment[TAB_NAME.length];
         {
-            for (int i = 0; i < TITLE.length; i++)
+            for (int i = 0; i < TAB_NAME.length; i++)
                 fragments[i] = NewsFragment.newInstance(i);
         }
-
-        public MainPageAdaper(FragmentManager fm) {
-            super(fm);
+        public MainNewsPageAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
         }
-
-        @Override
-        public Fragment getItem(int position) {
-            return fragments[position];
+        public Fragment getItem(int i) {
+            return fragments[i];
         }
-
-        @Override
         public int getCount() {
-            return TITLE.length;
+            return TAB_NAME.length;
         }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return TITLE[position % TITLE.length];
+        public CharSequence getPageTitle(int i) {
+            return TAB_NAME[i % TAB_NAME.length];
         }
     }
 }

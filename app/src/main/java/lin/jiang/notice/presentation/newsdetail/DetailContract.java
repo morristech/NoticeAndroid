@@ -1,5 +1,6 @@
 package lin.jiang.notice.presentation.newsdetail;
 
+import android.app.Activity;
 import android.webkit.WebView;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class DetailContract {
         void getVisitNumJson();
         void loadCommentListJson();
         void addComment(String msg);
-        void doShare();
+        void doShare(Activity activity, NewsDetail newsDetail);
         void seeFile();
     }
 

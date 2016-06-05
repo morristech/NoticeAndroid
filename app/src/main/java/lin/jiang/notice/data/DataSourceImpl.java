@@ -15,7 +15,8 @@ import lin.jiang.notice.domain.repository.DataSource;
 public class DataSourceImpl implements DataSource {
 
     @Override
-    public void getNewsList(boolean force, String _type, String _source, String _startId, String _pageNum, Callback<NewsList> callback) {
+    public void getNewsList(boolean force, String _type, String _source, String _startId,
+                            String _pageNum, Callback<NewsList> callback) {
         NewsList newsList = null;
         if (force) {
             try {

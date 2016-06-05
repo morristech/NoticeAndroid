@@ -12,7 +12,6 @@ import lin.jiang.notice.util.L;
  * Created by Summer on 2016/5/4.
  */
 public class NewsPresenter implements NewsContract.Presenter {
-
     private int type;
     private NewsContract.View mView;
     private final NewsUseCase mNewsUseCase;

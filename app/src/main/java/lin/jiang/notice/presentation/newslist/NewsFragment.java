@@ -22,7 +22,8 @@ import lin.jiang.notice.util.StringUtil;
 import lin.jiang.notice.util.TimeUtil;
 import lin.jiang.notice.util.ViewStateUtil;
 
-public class NewsFragment extends BaseViewPagerFragment implements NewsContract.View, PullToRefreshView.OnRefreshListener, ViewStateUtil.OnStateClickListener {
+public class NewsFragment extends BaseViewPagerFragment
+        implements NewsContract.View, PullToRefreshView.OnRefreshListener, ViewStateUtil.OnStateClickListener {
 
     private static final String ARG_PAGE = "arg_page";
     private int PAGE = 0;
@@ -90,29 +91,29 @@ public class NewsFragment extends BaseViewPagerFragment implements NewsContract.
         if (isFirst) mPresenter.initData();
     }
 
-    @Override
-    public void showLoadingView() {
-        if (pullToRefreshView != null) pullToRefreshView.setRefreshing(false);
-        if (mViewStateUtil != null) mViewStateUtil.changeState(ViewStateUtil.STATE.Loading);
-    }
+@Override
+public void showLoadingView() {
+    if (pullToRefreshView != null) pullToRefreshView.setRefreshing(false);
+    if (mViewStateUtil != null) mViewStateUtil.changeState(ViewStateUtil.STATE.Loading);
+}
 
-    @Override
-    public void showErrorView() {
-        if (pullToRefreshView != null) pullToRefreshView.setRefreshing(false);
-        if (mViewStateUtil != null) mViewStateUtil.changeState(ViewStateUtil.STATE.ERROR);
-    }
+@Override
+public void showErrorView() {
+    if (pullToRefreshView != null) pullToRefreshView.setRefreshing(false);
+    if (mViewStateUtil != null) mViewStateUtil.changeState(ViewStateUtil.STATE.ERROR);
+}
 
-    @Override
-    public void showNoneView() {
-        if (pullToRefreshView != null) pullToRefreshView.setRefreshing(false);
-        if (mViewStateUtil != null) mViewStateUtil.changeState(ViewStateUtil.STATE.EMPTY);
-    }
+@Override
+public void showNoneView() {
+    if (pullToRefreshView != null) pullToRefreshView.setRefreshing(false);
+    if (mViewStateUtil != null) mViewStateUtil.changeState(ViewStateUtil.STATE.EMPTY);
+}
 
-    @Override
-    public void showDataView() {
-        if (pullToRefreshView != null) pullToRefreshView.setRefreshing(false);
-        if (mViewStateUtil != null) mViewStateUtil.changeState(ViewStateUtil.STATE.NORMAL);
-    }
+@Override
+public void showDataView() {
+    if (pullToRefreshView != null) pullToRefreshView.setRefreshing(false);
+    if (mViewStateUtil != null) mViewStateUtil.changeState(ViewStateUtil.STATE.NORMAL);
+}
 
     @Override
     public void notifyData(List<NewsList.News> lists) {

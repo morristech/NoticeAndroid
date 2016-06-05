@@ -158,6 +158,7 @@ public class DetailActivity extends BaseActivtiy implements DetailContract.View,
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_share) {
+            mPresenter.doShare(this,newsDetail);
             return true;
         } else if (id == R.id.action_origin) {
             showOriginView();

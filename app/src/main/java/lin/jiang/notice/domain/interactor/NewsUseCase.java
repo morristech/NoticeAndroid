@@ -19,7 +19,8 @@ public class NewsUseCase extends UseCase<NewsUseCase.RequestValues,NewsUseCase.R
     }
     @Override
     protected void executeUseCase(RequestValues requestValues) {
-        dataSource.getNewsList(requestValues.force,requestValues.type, requestValues.source, requestValues.startId, requestValues.pageNum, new DataSource.Callback<NewsList>() {
+        dataSource.getNewsList(requestValues.force,requestValues.type,
+                requestValues.source, requestValues.startId, requestValues.pageNum, new DataSource.Callback<NewsList>() {
             @Override
             public void onSuccess(NewsList data) {
                 L.i("NewsUseCase getNewsList onSuccess");

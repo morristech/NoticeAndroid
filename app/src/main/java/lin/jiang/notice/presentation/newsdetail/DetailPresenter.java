@@ -1,5 +1,8 @@
 package lin.jiang.notice.presentation.newsdetail;
 
+import android.app.Activity;
+
+import lin.jiang.notice.domain.entity.NewsDetail;
 import lin.jiang.notice.domain.exception.ResponeException;
 import lin.jiang.notice.domain.excutor.UseCaseHandler;
 import lin.jiang.notice.domain.interactor.CommentListUseCase;
@@ -112,8 +115,14 @@ public class DetailPresenter implements DetailContract.Presenter {
     }
 
     @Override
-    public void doShare() {
-
+    public void doShare(Activity activity,NewsDetail newsDetail) {
+        if (newsDetail == null ||!newsDetail.isResult()|| newsDetail.getData()==null) return;
+        String content = newsDetail.getData().getContent().getContent();
+        if (content.length()>30) {
+            content = newsDetail.getData().getContent().getContent().substring(0, 29);
+        }
+        ShareBoardActivity.enter(activity,new ShareBoardActivity.ShareData(newsDetail.getData().getArticle().getTitle(),
+                content,null,"http://115.159.63.67:8000/news/html/?_aid=" + id));
     }
 
     @Override
