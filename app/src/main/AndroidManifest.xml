@@ -35,6 +35,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".presentation.main.SearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/TranslationActivity"/>
 
         <activity
             android:name=".presentation.newsdetail.ShareBoardActivity"

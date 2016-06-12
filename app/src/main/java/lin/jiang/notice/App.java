@@ -29,10 +29,8 @@ public class App extends Application {
         super.onCreate();
         application = this;
         CrashReport.initCrashReport(this, Constant.ID_BUGLY, Constant.DEBUG);
-//微信    wx12342956d1cab4f9,a5ae111de7d9ea137e88a5e02c07c94d
-        PlatformConfig.setWeixin("wx12342956d1cab4f9", "a5ae111de7d9ea137e88a5e02c07c94d");
+        PlatformConfig.setWeixin("wxfc17a2d23a946056", "fc9a65c851d8e5ab61c8e36010bda220");
         PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
-        //新浪微博
         PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad");
         deviceId = DeviceUtil.getID(this);
     }

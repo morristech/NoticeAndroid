@@ -55,7 +55,6 @@ public class DetailPresenter implements DetailContract.Presenter {
     @Override
     public void loadHtml(boolean isOrigin) {
         if (isOrigin) {
-
             return;
         }
         mView.getWebView().loadUrl("http://115.159.63.67:8000/news/html/?_aid=" + id);
